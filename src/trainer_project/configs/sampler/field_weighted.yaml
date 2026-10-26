@@ -1,0 +1,5 @@
+_target_: trainer_project.data.DistributedFieldWeightedSampler
+field: manifest_name
+replacement: true
+samples_per_epoch: null
+missing_policy: error

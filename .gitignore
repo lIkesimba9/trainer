@@ -1,0 +1,11 @@
+.venv/
+.cache/
+.tmp/
+__pycache__/
+*.pyc
+runs/
+*.egg-info/
+.ruff_cache/
+examples/
+tz.md
+AGENT.md

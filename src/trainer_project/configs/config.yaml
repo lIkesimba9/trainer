@@ -1,0 +1,54 @@
+defaults:
+  - task: classification
+  - data: csv
+  - model: tiny_classifier
+  - objective: cross_entropy
+  - optimizer: adamw
+  - scheduler: cosine
+  - sampler: shuffle
+  - transforms: default
+  - evaluator: default
+  - logger: tensorboard
+  - _self_
+schema_version: 2
+seed: 42
+output_dir: runs
+trainer:
+  _target_: lightning.pytorch.Trainer
+  accelerator: auto
+  devices: 1
+  num_nodes: 1
+  strategy: auto
+  precision: 32-true
+  max_epochs: 10
+  accumulate_grad_batches: 1
+  gradient_clip_val: 1.0
+  deterministic: true
+  use_distributed_sampler: false
+  num_sanity_val_steps: 0
+  enable_progress_bar: true
+  enable_model_summary: true
+  log_every_n_steps: 1
+checkpoint:
+  monitor: val/pooled/f1_macro
+  mode: max
+  save_top_k: 3
+  save_last: true
+  every_n_epochs: 1
+  tie_policy: keep_earlier
+  nan_policy: skip
+reproducibility:
+  mode: reproducible
+  strict_resume_boundary: epoch
+parameter_groups:
+  exclude_bias_norm_decay: true
+ssl_evaluation:
+  enabled: false
+compatibility:
+  custom_validated: false
+callbacks: []
+freeze_schedule: {}
+tta:
+  enabled: false
+  transforms: [identity, hflip]
+  aggregation: mean_probabilities

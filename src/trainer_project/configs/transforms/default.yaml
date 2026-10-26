@@ -1,0 +1,8 @@
+train:
+  _target_: trainer_project.transforms.SampleTransform
+  image_size: 32
+  horizontal_flip: 0.5
+eval:
+  _target_: trainer_project.transforms.SampleTransform
+  image_size: 32
+ssl: false

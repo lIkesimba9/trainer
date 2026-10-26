@@ -1,0 +1,7 @@
+name: plateau
+interval: validation
+monitor: val/pooled/f1_macro
+mode: max
+factor: 0.1
+patience: 5
+warmup_steps: 0

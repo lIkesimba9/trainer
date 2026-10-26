@@ -1,0 +1,19 @@
+# @package _global_
+defaults:
+  - override /task: segmentation
+  - override /model: segmentation
+  - override /objective: segmentation
+data:
+  schema:
+    targets:
+      label: null
+      segmentation_target:
+        column: segmentation_mask
+        type: segmentation
+        num_classes: 2
+        classes: [background, foreground]
+        ignore_index: 255
+evaluation:
+  target_key: segmentation_target
+checkpoint:
+  monitor: val/pooled/dice_macro

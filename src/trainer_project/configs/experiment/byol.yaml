@@ -1,0 +1,10 @@
+# @package _global_
+defaults:
+  - override /task: ssl
+  - override /model: byol
+  - override /objective: byol
+transforms:
+  ssl: true
+checkpoint:
+  monitor: val/pooled/loss
+  mode: min

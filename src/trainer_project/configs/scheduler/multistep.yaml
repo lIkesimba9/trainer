@@ -1,0 +1,4 @@
+name: multistep
+interval: optimizer_step
+warmup_steps: 0
+min_lr: 0.0

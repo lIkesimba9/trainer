@@ -1,0 +1,5 @@
+_target_: trainer_project.objectives.SegmentationObjective
+target_key: segmentation_target
+target_mode: exclusive
+ignore_index: 255
+dice_weight: 0.0

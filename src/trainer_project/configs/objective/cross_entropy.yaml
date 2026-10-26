@@ -1,0 +1,2 @@
+_target_: trainer_project.objectives.MaskedCrossEntropy
+target_key: label

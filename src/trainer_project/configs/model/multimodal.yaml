@@ -1,0 +1,4 @@
+_target_: trainer_project.models.MultiModalModel
+profile: image_image_text
+feature_dim: 32
+num_classes: 2

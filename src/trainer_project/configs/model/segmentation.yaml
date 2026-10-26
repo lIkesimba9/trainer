@@ -1,0 +1,3 @@
+_target_: trainer_project.models.TinySegmenter
+num_classes: 2
+width: 16

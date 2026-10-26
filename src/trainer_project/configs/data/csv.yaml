@@ -1,0 +1,18 @@
+_target_: trainer_project.data.ManifestDataModule
+_recursive_: false
+data_root: .
+batch_size_per_device: 16
+num_workers: 0
+pin_memory: false
+persistent_workers: false
+schema:
+  inputs:
+    image: {column: image, type: image}
+  targets:
+    label: {column: label, type: categorical, allow_missing: true, classes: [class_a, class_b]}
+class_maps: {}
+train: []
+val: []
+test: []
+identity_policy:
+  overlap: error

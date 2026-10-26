@@ -1,0 +1,7 @@
+_target_: trainer_project.models.MAEModel
+image_size: 32
+patch_size: 4
+embedding_dim: 32
+decoder_dim: 32
+num_heads: 4
+mask_ratio: 0.75

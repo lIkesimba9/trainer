@@ -1,0 +1,6 @@
+_target_: trainer_project.models.ImageClassifier
+num_classes: 2
+embedding_dim: 32
+backbone:
+  _target_: trainer_project.models.TinyBackbone
+  feature_dim: 32

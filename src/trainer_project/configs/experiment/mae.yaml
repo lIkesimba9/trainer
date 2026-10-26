@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - override /task: ssl
+  - override /model: mae
+  - override /objective: mae
+checkpoint:
+  monitor: val/pooled/loss
+  mode: min

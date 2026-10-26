@@ -1,0 +1,3 @@
+_target_: trainer_project.models.SegFormerAdapter
+num_classes: 2
+pretrained: false

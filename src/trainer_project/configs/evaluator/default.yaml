@@ -1,0 +1,7 @@
+# @package evaluation
+target_key: label
+pooled_policy: observations
+manifest_macro: false
+test_during_fit:
+  enabled: true
+  every_n_validation_events: 1

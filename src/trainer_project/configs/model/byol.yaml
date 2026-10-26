@@ -1,0 +1,5 @@
+_target_: trainer_project.models.BYOLModel
+feature_dim: 32
+projection_dim: 32
+hidden_dim: 64
+ema_decay: 0.99
