@@ -124,6 +124,25 @@ real JPEG/PNG decoding, finite normalized outputs, exact label order, tails, and
 optimizer update in the target CUDA environment. Use separate output directories for trial
 checkpoints and validation reports; preserve existing jobs and artifacts.
 
+GPU smoke checks on 13 November 2026 passed for both recipes using DALI 2.3.0 on an A100 80GB.
+The published backend SHA matches the tested source. The 32-sample stress set covered all eleven
+classes and forced elastic deformation on the largest crop, containing 29,910,972 pixels.
+
+| Recipe | Augmentation microbatch | Wall time including build | Peak Torch allocated / reserved |
+| --- | ---: | ---: | ---: |
+| `gpu_native` | 4 | 3.965 s | 1,808 / 3,320 MiB |
+| `gpu_bounded`, long edge 1024 | 8 | 4.141 s | 388 / 864 MiB |
+
+These are stress smoke checks, not representative throughput measurements. Their wall times
+include pipeline construction, their microbatches differ, and Torch memory excludes DALI's
+internal allocations. Two validation images also passed a geometry comparison against legacy
+preprocessing: mean absolute normalized-tensor difference 0.00787 and maximum difference
+0.13943. This does not establish pixel equivalence. Training pilot optimizer checks and
+end-to-end throughput are pending.
+
+The [sanitized GPU probe record](benchmarks/dali_gpu_probe_20261113.json) contains the exact
+backend SHA, measurements, and limits without source images, patient paths, or manifests.
+
 Operator references: [DALI image decoder](https://docs.nvidia.com/deeplearning/dali/user-guide/docs/operations/nvidia.dali.fn.decoders.image.html),
 [DALI CLAHE](https://docs.nvidia.com/deeplearning/dali/user-guide/docs/operations/nvidia.dali.fn.clahe.html),
 [DALI Python functions](https://docs.nvidia.com/deeplearning/dali/user-guide/docs/operations/nvidia.dali.fn.python_function.html).
