@@ -18,6 +18,7 @@ dependencies = [
 vision = ["timm>=1.0,<2", "torchvision==0.23.0", "transformers>=4.48,<5"]
 augmentations = ["albumentations>=2,<3", "kornia>=0.8,<0.9"]
 data = ["datasets>=3,<5", "pycocotools>=2.0.8,<3"]
+dali = ["nvidia-dali-cuda120==2.3.0"]
 wandb = ["wandb>=0.19,<1"]
 
 [dependency-groups]

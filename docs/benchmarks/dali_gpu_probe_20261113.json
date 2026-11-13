@@ -1,0 +1,48 @@
+{
+  "record_type": "sanitized_gpu_probe_summary",
+  "date": "2026-11-13",
+  "status": "passed",
+  "backend_source_sha256": "0d6b285ab8dc9943921ccb13472f7b65865ee72492b94d0cc28ee621425aa9f6",
+  "dali_version": "2.3.0",
+  "hardware_family": "NVIDIA A100 80GB",
+  "sample_count": 32,
+  "represented_class_count": 11,
+  "largest_upright_bbox_area_pixels": 29910972,
+  "stress_condition": "Elastic deformation forced on the largest native crop",
+  "optimizer_update_tested": false,
+  "recipes": [
+    {
+      "recipe": "gpu_native",
+      "augmentation_microbatch": 4,
+      "wall_seconds_including_pipeline_build": 3.964758,
+      "peak_torch_reserved_mib": 3320,
+      "peak_torch_allocated_mib": 1808,
+      "status": "passed"
+    },
+    {
+      "recipe": "gpu_bounded",
+      "max_long_edge": 1024,
+      "augmentation_microbatch": 8,
+      "wall_seconds_including_pipeline_build": 4.140844,
+      "peak_torch_reserved_mib": 864,
+      "peak_torch_allocated_mib": 388,
+      "status": "passed"
+    }
+  ],
+  "validation_geometry_comparison": {
+    "reference": "Legacy CPU validation preprocessing",
+    "sample_count": 2,
+    "comparison_space": "Normalized float32 image tensors",
+    "mean_absolute_difference": 0.007873425,
+    "maximum_absolute_difference": 0.13943368,
+    "mean_absolute_difference_limit": 0.1,
+    "status": "passed"
+  },
+  "limitations": [
+    "The stress sample set is not representative of an epoch or sustained loader throughput.",
+    "Wall time includes pipeline construction; augmentation microbatch differs between recipes.",
+    "Torch memory peaks exclude DALI internal allocations and other GPU processes.",
+    "Two validation images provide a geometry smoke check, not pixel-equivalence evidence.",
+    "Training pilot optimizer updates and end-to-end throughput are tracked separately."
+  ]
+}
