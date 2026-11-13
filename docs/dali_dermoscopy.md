@@ -137,11 +137,29 @@ These are stress smoke checks, not representative throughput measurements. Their
 include pipeline construction, their microbatches differ, and Torch memory excludes DALI's
 internal allocations. Two validation images also passed a geometry comparison against legacy
 preprocessing: mean absolute normalized-tensor difference 0.00787 and maximum difference
-0.13943. This does not establish pixel equivalence. Training pilot optimizer checks and
-end-to-end throughput are pending.
+0.13943. This does not establish pixel equivalence.
 
 The [sanitized GPU probe record](benchmarks/dali_gpu_probe_20261113.json) contains the exact
 backend SHA, measurements, and limits without source images, patient paths, or manifests.
+
+Four separate three-epoch training pilots are configured at resolution 448 and effective batch
+size 256. At the recorded startup snapshot, all three DALI pilots had passed a complete
+optimizer-update and D4-inference smoke check and were training with finite loss:
+
+| Model / sampler | Recipe | Verified training updates | Smoke peak Torch reserved |
+| --- | --- | ---: | ---: |
+| DINOv3-B / ordinary | `gpu_native` | 10 | 7,216 MiB |
+| DINOv3-B / ordinary | `gpu_bounded`, long edge 1024 | 5 | 5,282 MiB |
+| EVA02-B / PK11 | `gpu_bounded`, long edge 1024 | 5 | 7,234 MiB |
+| DINOv3-B / ordinary | Legacy CPU, 6 workers | CPU augmentation warmup | Pending |
+
+The pilots use BF16 mixed precision, float32 CosFace loss, model-specific frozen normalization,
+and training microbatch 32. Their validation F1 and paired end-to-end speed measurements are not
+yet available. The finite losses establish successful training startup; they do not establish
+quality improvements or speedups. The existing training series remains separate.
+
+The [sanitized pilot startup record](benchmarks/dali_pilot_startup_20261113.json) records the
+models, configuration, smoke checks, and observed finite updates without private source paths.
 
 Operator references: [DALI image decoder](https://docs.nvidia.com/deeplearning/dali/user-guide/docs/operations/nvidia.dali.fn.decoders.image.html),
 [DALI CLAHE](https://docs.nvidia.com/deeplearning/dali/user-guide/docs/operations/nvidia.dali.fn.clahe.html),

@@ -1,0 +1,81 @@
+{
+  "record_type": "sanitized_training_pilot_startup_summary",
+  "date": "2026-11-13",
+  "backend_source_sha256": "0d6b285ab8dc9943921ccb13472f7b65865ee72492b94d0cc28ee621425aa9f6",
+  "dali_version": "2.3.0",
+  "planned_pilots": 4,
+  "pilots_training_at_snapshot": 3,
+  "pilots_in_cpu_warmup_at_snapshot": 1,
+  "planned_epochs_per_pilot": 3,
+  "effective_batch_size": 256,
+  "precision": "BF16 mixed precision; float32 CosFace loss",
+  "normalization_source": "Frozen pretrained-weight data config for each model",
+  "pilots": [
+    {
+      "model": "vit_base_patch16_dinov3.lvd1689m",
+      "resolution": 448,
+      "sampler": "ordinary",
+      "backend": "dali",
+      "recipe": "gpu_native",
+      "optimizer_smoke": "passed",
+      "d4_inference_smoke": "passed",
+      "smoke_loss": 13.638043,
+      "smoke_peak_torch_reserved_mib": 7216,
+      "training_status_at_snapshot": "running",
+      "verified_training_updates": 10,
+      "finite_training_loss_at_snapshot": 13.15796,
+      "model_training_microbatch": 32,
+      "model_evaluation_microbatch": 16
+    },
+    {
+      "model": "vit_base_patch16_dinov3.lvd1689m",
+      "resolution": 448,
+      "sampler": "ordinary",
+      "backend": "dali",
+      "recipe": "gpu_bounded",
+      "max_long_edge": 1024,
+      "optimizer_smoke": "passed",
+      "d4_inference_smoke": "passed",
+      "smoke_loss": 13.648379,
+      "smoke_peak_torch_reserved_mib": 5282,
+      "training_status_at_snapshot": "running",
+      "verified_training_updates": 5,
+      "finite_training_loss_at_snapshot": 12.93543,
+      "model_training_microbatch": 32
+    },
+    {
+      "model": "eva02_base_patch14_448.mim_in22k_ft_in22k_in1k",
+      "resolution": 448,
+      "sampler": "PK11",
+      "backend": "dali",
+      "recipe": "gpu_bounded",
+      "max_long_edge": 1024,
+      "optimizer_smoke": "passed",
+      "d4_inference_smoke": "passed",
+      "smoke_loss": 13.72311,
+      "smoke_peak_torch_reserved_mib": 7234,
+      "training_status_at_snapshot": "running",
+      "verified_training_updates": 5,
+      "finite_training_loss_at_snapshot": 13.30456,
+      "model_training_microbatch": 32
+    },
+    {
+      "model": "vit_base_patch16_dinov3.lvd1689m",
+      "resolution": 448,
+      "sampler": "ordinary",
+      "backend": "torch",
+      "recipe": "legacy_cpu",
+      "num_workers": 6,
+      "optimizer_smoke": "pending",
+      "training_status_at_snapshot": "CPU augmentation warmup in progress"
+    }
+  ],
+  "validation_macro_f1": null,
+  "paired_end_to_end_speedup": null,
+  "limitations": [
+    "This is a startup snapshot; the three-epoch training pilots were not complete.",
+    "Training loss confirms finite updates, not validation quality or recipe superiority.",
+    "Paired CPU/DALI throughput and validation metrics were not yet available.",
+    "Torch memory peaks exclude DALI internal allocations and other GPU processes."
+  ]
+}
